@@ -1,3 +1,7 @@
+/build
+/dist
+/OnionPerf.egg-info
+
 onionperf-data
 onionperf-private
 venv

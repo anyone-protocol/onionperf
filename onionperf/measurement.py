@@ -233,20 +233,22 @@ class Measurement(object):
 
         # if ctrl-c is pressed, shutdown child processes properly
         try:
+            # TODO: Fork stem to fix version detection for anon
+
             # make sure stem and Tor supports ephemeral HS (version >= 0.2.7.1-alpha)
             # and also the NEWNYM mode that clears descriptor cache (version >= 0.2.7.3-rc)
-            if do_onion:
-                try:
-                    tor_version = get_system_tor_version(self.tor_bin_path)
-                    if tor_version < Requirement.ADD_ONION or tor_version < Version('0.2.7.3-rc'):  # ADD_ONION is a stem 1.4.0 feature
-                        logging.warning("OnionPerf in onion mode requires Tor version >= 0.2.7.3-rc, you have {0}, aborting".format(tor_version))
-                        return
-                except:
-                    logging.warning("OnionPerf in onion mode requires stem version >= 1.4.0, you have {0}, aborting".format(stem_version))
-                    return
+            # if do_onion:
+            #     try:
+            #         tor_version = get_system_tor_version(self.tor_bin_path)
+            #         if tor_version < Requirement.ADD_ONION or tor_version < Version('0.2.7.3-rc'):  # ADD_ONION is a stem 1.4.0 feature
+            #             logging.warning("OnionPerf in onion mode requires Tor version >= 0.2.7.3-rc, you have {0}, aborting".format(tor_version))
+            #             return
+            #     except:
+            #         logging.warning("OnionPerf in onion mode requires stem version >= 1.4.0, you have {0}, aborting".format(stem_version))
+            #         return
 
-            logging.info("Bootstrapping started...")
-            logging.info("Log files for the client and server processes will be placed in {0}".format(self.datadir_path))
+            # logging.info("Bootstrapping started...")
+            # logging.info("Log files for the client and server processes will be placed in {0}".format(self.datadir_path))
 
             general_writables = []
             tgen_client_writable, torctl_client_writable = None, None

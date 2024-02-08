@@ -43,16 +43,16 @@ OnionPerf has several dependencies in order to perform measurements or analyze a
 
 The following description was written with a Debian system in mind but should be transferable to other Linux distributions and possibly even other operating systems.
 
-### Tor
+### Anon
 
-OnionPerf relies on the `tor` binary to start a Tor process on the client side to make client requests and another Tor process on the server side to host onion services.
+OnionPerf relies on the `anon` binary to start a Anon process on the client side to make client requests and another Anon process on the server side to host onion services.
 
-The easiest way to satisfy this dependency is to install the `tor` package, which puts the `tor` binary into the `PATH` where OnionPerf will find it. Optionally, systemd can be instructed to make sure that `tor` is never started as a service:
+The easiest way to satisfy this dependency is to install the `tor` package, which puts the `tor` binary into the `PATH` where OnionPerf will find it. Optionally, systemd can be instructed to make sure that `anon` is never started as a service:
 
 ```shell
-sudo apt install tor
-sudo systemctl stop tor.service
-sudo systemctl mask tor.service
+sudo apt install anon
+sudo systemctl stop anon.service
+sudo systemctl mask anon.service
 ```
 
 Alternatively, Tor can be built from source:
@@ -60,14 +60,14 @@ Alternatively, Tor can be built from source:
 ```shell
 sudo apt install automake build-essential libevent-dev libssl-dev zlib1g-dev
 cd ~/
-git clone https://git.torproject.org/tor.git
-cd tor/
+git clone https://github.com/ATOR-Development/ator-protocol.git
+cd ator-protocol/
 ./autogen.sh
 ./configure --disable-asciidoc
 make
 ```
 
-In this case the resulting `tor` binary can be found in `~/tor/src/app/tor` and needs to be passed to OnionPerf's `--tor` parameter when doing measurements.
+In this case the resulting `anon` binary can be found in `~/ator-protocol/src/app/anon` and needs to be passed to OnionPerf's `--tor` parameter when doing measurements.
 
 ### TGen
 

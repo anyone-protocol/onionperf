@@ -4,9 +4,9 @@ networkx
 nose-cov
 nose
 numpy
-pandas
+pandas == 1.5.3
 scipy
-seaborn >= 0.11
+seaborn == 0.11.2
 stem >= 1.7.0
 tgentools
 requests

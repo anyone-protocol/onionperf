@@ -64,4 +64,4 @@ WORKDIR /home/onionperf
 # Expose ORPort, DirPort
 EXPOSE 9510 9520
 # Start OnionPerf when the container runs
-CMD ["onionperf", "measure", "--onion-only", "--tgen", "/home/onionperf/ator-protocol/src/app/anon", "--tor", "/home/onionperf/tgen/build/src/tgen", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520"]
+CMD ["onionperf", "measure", "--onion-only", "--tgen", "/home/onionperf/tgen/build/src/tgen", "--tor", "/home/onionperf/ator-protocol/src/app/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520"]

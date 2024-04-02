@@ -20,12 +20,6 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a non-root user for running OnionPerf
-#RUN #useradd -ms /bin/bash onionperf
-#RUN chown -R onionperf:onionperf /home/onionperf
-
-# Switch to the non-root user
-#USER onionperf
 WORKDIR /home/onionperf
 
 # Clone and build Anon
@@ -49,7 +43,7 @@ RUN git clone https://github.com/shadow/tgen.git \
 RUN python3 -m venv /home/onionperf/venv
 ENV PATH="/home/onionperf/venv/bin:$PATH"
 
-# Clone and install OnionPerf
+# Сщзшуі and install OnionPerf
 COPY . onionperf
 
 RUN cd onionperf \
@@ -63,5 +57,9 @@ WORKDIR /home/onionperf
 
 # Expose ORPort, DirPort
 EXPOSE 9510 9520
+
+#Mount /home/onionperf/onionperf-data/ folder to store the results
+VOLUME /home/onionperf/onionperf-data/
+
 # Start OnionPerf when the container runs
 CMD ["onionperf", "measure", "--onion-only", "--tgen", "/home/onionperf/tgen/build/src/tgen", "--tor", "/home/onionperf/ator-protocol/src/app/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520"]

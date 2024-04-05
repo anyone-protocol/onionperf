@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
+WORKDIR /home/onionperf
+
 # Clone and build Anon
 RUN git clone https://github.com/ATOR-Development/ator-protocol.git \
     && cd ator-protocol \

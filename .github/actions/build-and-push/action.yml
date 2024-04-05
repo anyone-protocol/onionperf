@@ -6,6 +6,8 @@ inputs:
     required: true
   docker-tag:
     required: true
+  environment:
+    required: true
 
 runs:
   using: "composite"
@@ -22,4 +24,6 @@ runs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ inputs.docker-username }}/onionperf-ator:${{ github.sha }},${{ inputs.docker-username }}/onionperf-ator:${{ inputs.docker-tag }}
+        tags: ${{ inputs.docker-username }}/onionperf-anon:${{ github.sha }},${{ inputs.docker-username }}/onionperf-anon:${{ inputs.docker-tag }}
+        build-args: |
+          ANON_ENV=${{ inputs.environment }}

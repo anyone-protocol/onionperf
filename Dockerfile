@@ -3,6 +3,8 @@ FROM debian:bookworm
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+ARG ANON_ENV=live
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     cron \
@@ -24,6 +26,7 @@ RUN apt-get update && apt-get install -y \
 # Clone and build Anon
 RUN git clone https://github.com/ATOR-Development/ator-protocol.git \
     && cd ator-protocol \
+    && ./scripts/ci/update-env.sh ${ANON_ENV} \
     && ./autogen.sh \
     && ./configure --disable-asciidoc \
     && make

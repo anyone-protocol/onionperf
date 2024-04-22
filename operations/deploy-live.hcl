@@ -6,6 +6,12 @@ job "onionperf-anon-live" {
   group "onionperf-anon-live-group" {
     count = 3
 
+    volume "onionperf-results" {
+      type      = "host"
+      read_only = false
+      source    = "onionperf-live"
+    }
+
     spread {
       attribute = "${node.unique.id}"
       weight    = 100
@@ -36,6 +42,11 @@ job "onionperf-anon-live" {
     task "onionperf-anon-live-task" {
       driver = "docker"
 
+      volume_mount {
+        volume      = "onionperf-results"
+        destination = "/home/onionperf/results"
+        read_only   = false
+      }
 
       config {
         image   = "svforte/onionperf-anon:latest-live"

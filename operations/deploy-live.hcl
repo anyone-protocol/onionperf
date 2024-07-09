@@ -53,6 +53,11 @@ job "onionperf-anon-live" {
         force_pull = true
       }
 
+      service {
+        name = "onionperf-anon-live"
+        tags = [ "logging" ]
+      }
+
       resources {
         cpu    = 512
         memory = 512

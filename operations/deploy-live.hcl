@@ -37,6 +37,12 @@ job "onionperf-anon-live" {
       port "listen-port" {
         static = 9510
       }
+
+      port "http-port" {
+        static = 9222
+        to     = 80
+        host_network = "wireguard"
+      }
     }
 
     task "onionperf-anon-live-task" {
@@ -61,6 +67,76 @@ job "onionperf-anon-live" {
       resources {
         cpu    = 512
         memory = 512
+      }
+    }
+
+    task "onionperf-nginx-live-task" {
+      driver = "docker"
+
+      volume_mount {
+        volume      = "onionperf-results"
+        destination = "/var/www/onionperf"
+        read_only   = true
+      }
+
+      config {
+        image   = "nginx"
+        volumes = [
+          "local/nginx-onionperf:/etc/nginx/conf.d/default.conf:ro"
+        ]
+        ports = ["http-port"]
+      }
+
+      resources {
+        cpu    = 256
+        memory = 256
+      }
+
+      service {
+        name     = "onionperf-live"
+        provider = "nomad"
+        tags     = ["onionperf", "logging"]
+        port     = "http-port"
+        check {
+          name     = "onionperf nginx http server alive"
+          type     = "tcp"
+          interval = "10s"
+          timeout  = "10s"
+          check_restart {
+            limit = 10
+            grace = "30s"
+          }
+        }
+      }
+
+      template {
+        change_mode = "noop"
+        data        = <<EOH
+##
+# The following is a simple nginx configuration to run OnionPerf.
+##
+server {
+
+  root /var/www/onionperf;
+
+  # This option make sure that nginx will follow symlinks to the appropriate
+  # OnionPerf folders
+  autoindex on;
+
+  index index.html;
+
+  listen 0.0.0.0:80;
+
+  location / {
+    try_files $uri $uri/ =404;
+  }
+
+  location ~/\.ht {
+    deny all;
+  }
+}
+        EOH
+        destination = "local/nginx-onionperf"
       }
     }
   }

@@ -1,0 +1,7 @@
+version: '3'
+services:
+  onionperf:
+    image: onionperf
+    restart: always
+    volumes:
+      - ./onionperf-data/:/home/onionperf/onionperf-data/

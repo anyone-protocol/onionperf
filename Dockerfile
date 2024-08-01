@@ -52,23 +52,8 @@ RUN cd onionperf \
     && pip install --no-cache-dir -r requirements.txt \
     && python setup.py install
 
-# Set environment variables and working directory
-ENV TOR_PATH="/home/onionperf/ator-protocol/src/app/anon"
-ENV TGEN_PATH="/home/onionperf/tgen/build/src/tgen"
-WORKDIR /home/onionperf
-
 # Expose Listen and Connect Ports
 EXPOSE 9510 9520
 
-# Mount /home/onionperf/results folder to store the results
-RUN mkdir /home/onionperf/results
-VOLUME /home/onionperf/results
-
-# Add crontab to prepare the cron configuration
-ADD crontab.txt /home/onionperf/crontab.txt
-RUN crontab /home/onionperf/crontab.txt
-
-COPY docker-entrypoint.sh /home/onionperf/
-
 # Start OnionPerf when the container runs
-ENTRYPOINT [ "sh", "./docker-entrypoint.sh" ]
+CMD [ "onionperf", "measure", "--tgen", "tgen/build/src/tgen", "--tor", "ator-protocol/src/app/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520" ]

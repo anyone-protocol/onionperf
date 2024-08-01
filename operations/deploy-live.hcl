@@ -6,7 +6,7 @@ job "onionperf-anon-live" {
   group "onionperf-anon-live-group" {
     count = 3
 
-    volume "onionperf-results" {
+    volume "onionperf-data" {
       type      = "host"
       read_only = false
       source    = "onionperf-live"
@@ -49,14 +49,15 @@ job "onionperf-anon-live" {
       driver = "docker"
 
       volume_mount {
-        volume      = "onionperf-results"
-        destination = "/home/onionperf/results"
+        volume      = "onionperf-data"
+        destination = "/home/onionperf/onionperf-data"
         read_only   = false
       }
 
       config {
         image   = "svforte/onionperf-anon:latest-live"
         force_pull = true
+        args = ["onionperf", "analyze", "--tgen", "onionperf-data/tgen-client/onionperf.tgen.log", "--torctl", "onionperf-data/tor-client/onionperf.torctl.log"]
       }
 
       service {
@@ -74,8 +75,8 @@ job "onionperf-anon-live" {
       driver = "docker"
 
       volume_mount {
-        volume      = "onionperf-results"
-        destination = "/var/www/onionperf"
+        volume      = "onionperf-data"
+        destination = "/var/www/onionperf-data"
         read_only   = true
       }
 
@@ -117,7 +118,7 @@ job "onionperf-anon-live" {
 ##
 server {
 
-  root /var/www/onionperf;
+  root /var/www/onionperf-data/htdocs;
 
   # This option make sure that nginx will follow symlinks to the appropriate
   # OnionPerf folders

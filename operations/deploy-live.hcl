@@ -41,7 +41,6 @@ job "onionperf-anon-live" {
       port "http-port" {
         static = 9222
         to     = 80
-        host_network = "wireguard"
       }
     }
 
@@ -57,7 +56,6 @@ job "onionperf-anon-live" {
       config {
         image   = "svforte/onionperf-anon:latest-live"
         force_pull = true
-        args = ["onionperf", "analyze", "--tgen", "onionperf-data/tgen-client/onionperf.tgen.log", "--torctl", "onionperf-data/tor-client/onionperf.torctl.log"]
       }
 
       service {
@@ -66,8 +64,8 @@ job "onionperf-anon-live" {
       }
 
       resources {
-        cpu    = 512
-        memory = 512
+        cpu    = 1024
+        memory = 256
       }
     }
 
@@ -89,13 +87,12 @@ job "onionperf-anon-live" {
       }
 
       resources {
-        cpu    = 256
-        memory = 256
+        cpu    = 64
+        memory = 64
       }
 
       service {
         name     = "onionperf-live"
-        provider = "nomad"
         tags     = ["onionperf", "logging"]
         port     = "http-port"
         check {

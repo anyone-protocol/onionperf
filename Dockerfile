@@ -62,4 +62,4 @@ COPY docker-entrypoint.sh /home/onionperf/
 EXPOSE 9510 9520
 
 # Start OnionPerf when the container runs
-ENTRYPOINT [ "sh", "docker-entrypoint.sh" ]
+ENTRYPOINT [ "sh", "./docker-entrypoint.sh" ]

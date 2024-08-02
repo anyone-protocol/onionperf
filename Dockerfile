@@ -52,8 +52,10 @@ RUN cd onionperf \
     && pip install --no-cache-dir -r requirements.txt \
     && python setup.py install
 
+COPY docker-entrypoint.sh .
+
 # Expose Listen and Connect Ports
 EXPOSE 9510 9520
 
 # Start OnionPerf when the container runs
-CMD [ "onionperf", "measure", "--tgen", "tgen/build/src/tgen", "--tor", "ator-protocol/src/app/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520" ]
+ENTRYPOINT [ "sh", "docker-entrypoint.sh" ]

@@ -52,7 +52,11 @@ RUN cd onionperf \
     && pip install --no-cache-dir -r requirements.txt \
     && python setup.py install
 
-COPY docker-entrypoint.sh .
+ENV TOR_PATH="/home/onionperf/ator-protocol/src/app/anon"
+ENV TGEN_PATH="/home/onionperf/tgen/build/src/tgen"
+WORKDIR /home/onionperf
+
+COPY docker-entrypoint.sh /home/onionperf/
 
 # Expose Listen and Connect Ports
 EXPOSE 9510 9520

@@ -64,7 +64,7 @@ job "onionperf-anon-live" {
       }
 
       resources {
-        cpu    = 1024
+        cpu    = 256
         memory = 256
       }
     }

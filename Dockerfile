@@ -3,13 +3,11 @@ FROM debian:bookworm
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-ARG ANON_ENV=live
+WORKDIR /home/onionperf
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    cron \
     automake \
-    wget \
     build-essential \
     cmake \
     git \
@@ -23,15 +21,13 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /home/onionperf
-
-# Clone and build Anon
-RUN git clone https://github.com/ATOR-Development/ator-protocol.git \
-    && cd ator-protocol \
-    && ./scripts/ci/update-env.sh ${ANON_ENV} \
-    && ./autogen.sh \
-    && ./configure --disable-asciidoc \
-    && make
+RUN apt-get -y update \
+    && apt-get -y install wget apt-transport-https \
+    && . /etc/os-release \
+    && wget -qO- https://deb.dmz.ator.dev/anon.asc | tee /etc/apt/trusted.gpg.d/anon.asc \
+    && echo "deb [signed-by=/etc/apt/trusted.gpg.d/anon.asc] https://deb.dmz.ator.dev anon-live-$VERSION_CODENAME main" > /etc/apt/sources.list.d/anon.list \
+    && apt-get -y update \
+    && apt-get -y install anon
 
 # Clone and build TGen
 RUN git clone https://github.com/shadow/tgen.git \
@@ -50,16 +46,11 @@ COPY . onionperf
 
 RUN cd onionperf \
     && pip install --no-cache-dir -r requirements.txt \
-    && python setup.py install
-
-ENV TOR_PATH="/home/onionperf/ator-protocol/src/app/anon"
-ENV TGEN_PATH="/home/onionperf/tgen/build/src/tgen"
-WORKDIR /home/onionperf
-
-COPY docker-entrypoint.sh /home/onionperf/
+    && python setup.py install \
+    && cd .. && rm -rf onionperf
 
 # Expose Listen and Connect Ports
 EXPOSE 9510 9520
 
 # Start OnionPerf when the container runs
-ENTRYPOINT [ "sh", "./docker-entrypoint.sh" ]
+CMD [ "onionperf", "measure", "--tgen", "/home/onionperf/tgen/build/src/tgen", "--tor", "/usr/sbin/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520" ]

@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get -y update \
+    && echo "anon anon/terms boolean true" | debconf-set-selections \
     && apt-get -y install wget apt-transport-https \
     && . /etc/os-release \
     && wget -qO- https://deb.dmz.ator.dev/anon.asc | tee /etc/apt/trusted.gpg.d/anon.asc \
@@ -54,3 +55,7 @@ EXPOSE 9510 9520
 
 # Start OnionPerf when the container runs
 CMD [ "onionperf", "measure", "--tgen", "/home/onionperf/tgen/build/src/tgen", "--tor", "/usr/sbin/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520" ]
+
+#onionperf measure --tgen tgen/build/src/tgen --tor /usr/sbin/anon --tgen-listen-port 9510 --tgen-connect-port 9520
+#onionperf analyze --tgen onionperf-data/tgen-client/onionperf.tgen.log --torctl onionperf-data/tor-client/onionperf.torctl.log
+#onionperf visualize --data onionperf.analysis.json.xz "Test Measurements"

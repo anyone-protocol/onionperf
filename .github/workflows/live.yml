@@ -26,4 +26,4 @@ jobs:
           environment: live
           nomad-cacert: operations/admin-ui-ca.crt
           nomad-token: ${{ secrets.NOMAD_TOKEN_ONIONPERF_DEPLOY }}
-          nomad-addr: ${{ secrets.NOMAD_DEPLOY_ADDR }}
+          nomad-addr: ${{ secrets.NOMAD_ADDR }}

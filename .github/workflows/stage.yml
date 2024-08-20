@@ -23,7 +23,7 @@ jobs:
       - name: Deploy
         uses: ./.github/actions/deploy
         with:
-          environment: dev
+          environment: stage
           nomad-cacert: operations/admin-ui-ca.crt
           nomad-token: ${{ secrets.NOMAD_TOKEN_ONIONPERF_DEPLOY }}
           nomad-addr: ${{ secrets.NOMAD_ADDR }}

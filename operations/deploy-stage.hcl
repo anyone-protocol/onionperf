@@ -29,15 +29,6 @@ job "onionperf-anon-stage" {
     network {
       mode = "bridge"
 
-      port "connect-port" {
-        static = 9520
-        host_network = "wireguard"
-      }
-
-      port "listen-port" {
-        static = 9510
-      }
-
       port "http-port" {
         static = 9221
         to     = 80

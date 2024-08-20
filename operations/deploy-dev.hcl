@@ -29,15 +29,6 @@ job "onionperf-anon-dev" {
     network {
       mode = "bridge"
 
-      port "connect-port" {
-        static = 9520
-        host_network = "wireguard"
-      }
-
-      port "listen-port" {
-        static = 9510
-      }
-
       port "http-port" {
         static = 9220
         to     = 80
@@ -55,6 +46,9 @@ job "onionperf-anon-dev" {
 
       config {
         image   = "svforte/onionperf-anon:latest-dev"
+        volumes = [
+          "local/anonrc:/etc/anon/anonrc:ro"
+        ]
         force_pull = true
       }
 
@@ -66,6 +60,14 @@ job "onionperf-anon-dev" {
       resources {
         cpu    = 256
         memory = 256
+      }
+
+      template {
+        change_mode = "noop"
+        data        = <<EOH
+AgreeToTerms 1
+        EOH
+        destination = "local/anonrc"
       }
     }
 

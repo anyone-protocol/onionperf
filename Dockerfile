@@ -57,3 +57,5 @@ EXPOSE 9510 9520
 
 # Start OnionPerf when the container runs
 CMD [ "onionperf", "measure", "--tgen", "/home/onionperf/tgen/build/src/tgen", "--tor", "/usr/sbin/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520" ]
+
+#onionperf measure --tgen /home/onionperf/tgen/build/src/tgen --tor /usr/sbin/anon --tgen-listen-port 9510 --tgen-connect-port 9520

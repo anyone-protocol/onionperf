@@ -25,3 +25,5 @@ runs:
         file: ./Dockerfile
         push: true
         tags: ${{ inputs.docker-username }}/onionperf-anon:${{ github.sha }},${{ inputs.docker-username }}/onionperf-anon:${{ inputs.docker-tag }}
+        build-args: |
+          ANON_ENV=${{ inputs.environment }}

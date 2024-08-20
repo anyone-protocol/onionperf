@@ -3,6 +3,8 @@ FROM debian:bookworm
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+ARG ANON_ENV=live
+
 WORKDIR /home/onionperf
 
 # Install system dependencies
@@ -26,7 +28,7 @@ RUN apt-get -y update \
     && apt-get -y install wget apt-transport-https \
     && . /etc/os-release \
     && wget -qO- https://deb.dmz.ator.dev/anon.asc | tee /etc/apt/trusted.gpg.d/anon.asc \
-    && echo "deb [signed-by=/etc/apt/trusted.gpg.d/anon.asc] https://deb.dmz.ator.dev anon-live-$VERSION_CODENAME main" > /etc/apt/sources.list.d/anon.list \
+    && echo "deb [signed-by=/etc/apt/trusted.gpg.d/anon.asc] https://deb.dmz.ator.dev anon-$ANON_ENV-$VERSION_CODENAME main" > /etc/apt/sources.list.d/anon.list \
     && apt-get -y update \
     && apt-get -y install anon
 

@@ -59,11 +59,11 @@ job "onionperf-anon-dev" {
         cpu    = 256
         memory = 256
       }
-
+      
       template {
         change_mode = "noop"
         data        = <<EOH
-AgreeToTerms 1
+AgreeToTerms 1        
         EOH
         destination = "local/anonrc"
       }

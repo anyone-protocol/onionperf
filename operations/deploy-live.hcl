@@ -29,15 +29,6 @@ job "onionperf-anon-live" {
     network {
       mode = "bridge"
 
-      port "connect-port" {
-        static = 9520
-        host_network = "wireguard"
-      }
-
-      port "listen-port" {
-        static = 9510
-      }
-
       port "http-port" {
         static = 9222
         to     = 80
@@ -68,7 +59,7 @@ job "onionperf-anon-live" {
         cpu    = 256
         memory = 256
       }
-
+      
       template {
         change_mode = "noop"
         data        = <<EOH

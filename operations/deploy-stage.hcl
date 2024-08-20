@@ -59,7 +59,7 @@ job "onionperf-anon-stage" {
         cpu    = 256
         memory = 256
       }
-
+      
       template {
         change_mode = "noop"
         data        = <<EOH

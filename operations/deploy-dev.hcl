@@ -46,9 +46,7 @@ job "onionperf-anon-dev" {
 
       config {
         image   = "svforte/onionperf-anon:latest-dev"
-        volumes = [
-          "local/anonrc:/etc/anon/anonrc:ro"
-        ]
+        volumes = ["local/anonrc:/etc/anon/anonrc:ro"]
         force_pull = true
       }
 

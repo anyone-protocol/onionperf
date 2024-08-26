@@ -1,0 +1,1 @@
+onionperf measure --tgen /home/onionperf/tgen/build/src/tgen --tor /usr/sbin/anon --tgen-listen-port 9510 --tgen-connect-port 9520 -n ${NOMAD_HOST_IP_http-port}

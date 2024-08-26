@@ -43,7 +43,6 @@ RUN git clone https://github.com/shadow/tgen.git \
 # Create and activate a Python virtual environment
 RUN python3 -m venv /home/onionperf/venv
 ENV PATH="/home/onionperf/venv/bin:$PATH"
-ENV NICKNAME = ${NOMAD_HOST_IP_http-port:-default_nickname} 
 
 # Copy and install OnionPerf
 COPY . onionperf
@@ -53,10 +52,10 @@ RUN cd onionperf \
     && python setup.py install \
     && cd .. && rm -rf onionperf
 
+COPY docker-entrypoint.sh docker-entrypoint.sh    
+
 # Expose Listen and Connect Ports
 EXPOSE 9510 9520
 
 # Start OnionPerf when the container runs
-CMD [ "onionperf", "measure", "--tgen", "/home/onionperf/tgen/build/src/tgen", "--tor", "/usr/sbin/anon", "--tgen-listen-port", "9510", "--tgen-connect-port", "9520", "-n", "${NICKNAME}" ]
-
-#onionperf measure --tgen /home/onionperf/tgen/build/src/tgen --tor /usr/sbin/anon --tgen-listen-port 9510 --tgen-connect-port 9520
+ENTRYPOINT [ "sh", "docker-entrypoint.sh" ]

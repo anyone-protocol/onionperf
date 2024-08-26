@@ -468,6 +468,8 @@ class TorCtlParser(Parser):
                 parts = line.strip().split()
                 if len(parts) < 11:
                     return True
+                print(parts)
+                print(parts[10])
                 self.name = parts[10]
             if re.search("Bootstrapped\s100", line) is not None:
                 self.boot_succeeded = True

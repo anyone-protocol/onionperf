@@ -45,7 +45,7 @@ job "onionperf-live" {
       }
 
       config {
-        image   = "svforte/onionperf-anon:latest-live"
+        image   = "svforte/onionperf-anon:c6c7b525331a66f50254d5d9ecb4300fd1bd9494"
         force_pull = true
       }
 

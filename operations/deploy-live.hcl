@@ -1,9 +1,9 @@
-job "onionperf-anon-live" {
+job "onionperf-live" {
   datacenters = ["ator-fin"]
   type        = "service"
   namespace   = "ator-network"
 
-  group "onionperf-anon-live-group" {
+  group "onionperf-live-group" {
     count = 3
 
     volume "onionperf-data" {
@@ -35,7 +35,7 @@ job "onionperf-anon-live" {
       }
     }
 
-    task "onionperf-anon-live-task" {
+    task "onionperf-measure-live-task" {
       driver = "docker"
 
       volume_mount {
@@ -51,7 +51,7 @@ job "onionperf-anon-live" {
       }
 
       service {
-        name = "onionperf-anon-live"
+        name = "onionperf-live"
         tags = [ "logging" ]
       }
 

@@ -50,9 +50,8 @@ COPY . onionperf
 RUN cd onionperf \
     && pip install --no-cache-dir -r requirements.txt \
     && python setup.py install \
-    && cd .. && rm -rf onionperf
-
-COPY docker-entrypoint.sh docker-entrypoint.sh    
+    && mv docker-entrypoint.sh .. \
+    && cd .. && rm -rf onionperf    
 
 # Expose Listen and Connect Ports
 EXPOSE 9510 9520

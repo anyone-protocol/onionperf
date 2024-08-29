@@ -1,9 +1,9 @@
-job "onionperf-anon-stage" {
+job "onionperf-stage" {
   datacenters = ["ator-fin"]
   type        = "service"
   namespace   = "ator-network"
 
-  group "onionperf-anon-stage-group" {
+  group "onionperf-stage-group" {
     count = 3
 
     volume "onionperf-data" {
@@ -35,7 +35,7 @@ job "onionperf-anon-stage" {
       }
     }
 
-    task "onionperf-anon-stage-task" {
+    task "onionperf-measure-stage-task" {
       driver = "docker"
 
       volume_mount {

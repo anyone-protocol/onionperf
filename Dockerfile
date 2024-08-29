@@ -19,12 +19,11 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     zlib1g-dev \
     python3-dev \
-    python3-venv\
+    python3-venv \
     software-properties-common \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get -y update \
-    && echo "anon anon/terms boolean true" | debconf-set-selections \
     && apt-get -y install wget apt-transport-https \
     && . /etc/os-release \
     && wget -qO- https://deb.dmz.ator.dev/anon.asc | tee /etc/apt/trusted.gpg.d/anon.asc \

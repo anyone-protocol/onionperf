@@ -46,7 +46,6 @@ job "onionperf-live" {
 
       config {
         image   = "svforte/onionperf-anon:latest-live"
-        volumes = ["local/anonrc:/etc/anon/anonrc:ro"]
         force_pull = true
       }
 
@@ -60,13 +59,6 @@ job "onionperf-live" {
         memory = 256
       }
       
-      template {
-        change_mode = "noop"
-        data        = <<EOH
-AgreeToTerms 1        
-        EOH
-        destination = "local/anonrc"
-      }
     }
 
     task "onionperf-nginx-live-task" {

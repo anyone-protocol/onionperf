@@ -1,4 +1,3 @@
-version: '3'
 services:
   onionperf:
     image: onionperf
@@ -7,3 +6,5 @@ services:
       - NOMAD_IP_http_port=localhost
     volumes:
       - ./onionperf-data/:/home/onionperf/onionperf-data/
+
+# docker build . -t onionperf --build-arg="ANON_ENV=dev"

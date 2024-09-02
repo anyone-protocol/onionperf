@@ -45,7 +45,7 @@ job "onionperf-live" {
       }
 
       config {
-        image   = "ghcr.io/ator-development/onionperf:DEPLOY_TAG"
+        image   = "ghcr.io/ator-development/onionperf:9ceca6c968870b27fb27f6d68b0a8aea7b1e10ad"
         force_pull = true
       }
 

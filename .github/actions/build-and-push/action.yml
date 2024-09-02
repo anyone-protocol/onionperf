@@ -7,7 +7,7 @@ inputs:
   docker-tag:
     required: true
   environment:
-    required: true
+    required: true  
 
 runs:
   using: "composite"
@@ -15,15 +15,16 @@ runs:
     - name: Log in to Docker Hub
       uses: docker/login-action@v1
       with:
+        registry: ghcr.io
         username: ${{ inputs.docker-username }}
         password: ${{ inputs.docker-password }}
 
-    - name: Build and push Docker image of onionperf
+    - name: Build and push Docker image of service
       uses: docker/build-push-action@v2
       with:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ inputs.docker-username }}/onionperf-anon:${{ github.sha }},${{ inputs.docker-username }}/onionperf-anon:${{ inputs.docker-tag }}
+        tags: ghcr.io/ator-development/onionperf:${{ inputs.docker-tag }}
         build-args: |
           ANON_ENV=${{ inputs.environment }}

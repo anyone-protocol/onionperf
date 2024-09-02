@@ -1,7 +1,8 @@
-version: '3'
 services:
   onionperf:
     image: onionperf
     restart: always
+    environment:
+      - NOMAD_IP_http_port=localhost
     volumes:
       - ./onionperf-data/:/home/onionperf/onionperf-data/

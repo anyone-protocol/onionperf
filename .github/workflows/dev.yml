@@ -3,7 +3,7 @@ name: DEV - Build and Deploy
 on:
   push:
     branches:
-      - main
+      - development
   workflow_dispatch:
 
 jobs:
@@ -16,14 +16,15 @@ jobs:
       - name: Build and push
         uses: ./.github/actions/build-and-push
         with:
-          docker-username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          docker-password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-          docker-tag: latest-dev
+          docker-username: ${{ github.actor }}
+          docker-password: ${{ secrets.GITHUB_TOKEN }}
+          docker-tag: ${{ github.sha }}
           environment: dev
-#      - name: Deploy
-#        uses: ./.github/actions/deploy
-#        with:
-#          environment: dev
-#          nomad-cacert: operations/admin-ui-ca.crt
-#          nomad-token: ${{ secrets.NOMAD_TOKEN_SBWS_DEPLOY }} #add deploy token
-#          nomad-addr: ${{ secrets.NOMAD_DEPLOY_ADDR }}
+      - name: Deploy
+        uses: ./.github/actions/deploy
+        with:
+          environment: dev
+          nomad-cacert: operations/admin-ui-ca.crt
+          nomad-token: ${{ secrets.NOMAD_TOKEN_ONIONPERF_DEPLOY }}
+          nomad-addr: ${{ secrets.NOMAD_ADDR }}
+          docker-tag: ${{ github.sha }}

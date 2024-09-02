@@ -6,6 +6,8 @@ inputs:
     required: true
   docker-tag:
     required: true
+  environment:
+    required: true  
 
 runs:
   using: "composite"
@@ -24,3 +26,5 @@ runs:
         file: ./docker/Dockerfile
         push: true
         tags: ghcr.io/ator-development/onionperf:${{ inputs.docker-tag }}
+        build-args: |
+          ANON_ENV=${{ inputs.environment }}

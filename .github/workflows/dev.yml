@@ -19,6 +19,7 @@ jobs:
           docker-username: ${{ github.actor }}
           docker-password: ${{ secrets.GITHUB_TOKEN }}
           docker-tag: ${{ github.sha }}
+          environment: dev
       - name: Deploy
         uses: ./.github/actions/deploy
         with:

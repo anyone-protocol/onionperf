@@ -45,7 +45,7 @@ job "onionperf-dev" {
       }
 
       config {
-        image   = "svforte/onionperf-anon:latest-dev"
+        image   = "ghcr.io/ator-development/onionperf:DEPLOY_TAG"
         force_pull = true
       }
 

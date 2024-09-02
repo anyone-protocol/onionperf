@@ -23,7 +23,7 @@ runs:
       uses: docker/build-push-action@v2
       with:
         context: .
-        file: ./docker/Dockerfile
+        file: ./Dockerfile
         push: true
         tags: ghcr.io/ator-development/onionperf:${{ inputs.docker-tag }}
         build-args: |

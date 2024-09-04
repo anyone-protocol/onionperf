@@ -60,7 +60,7 @@ Alternatively, Tor can be built from source:
 ```shell
 sudo apt install automake build-essential libevent-dev libssl-dev zlib1g-dev
 cd ~/
-git clone https://github.com/ATOR-Development/ator-protocol.git
+git clone https://github.com/anyone-protocol/ator-protocol.git
 cd ator-protocol/
 ./autogen.sh
 ./configure --disable-asciidoc

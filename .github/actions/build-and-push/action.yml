@@ -25,6 +25,6 @@ runs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/ator-development/onionperf:${{ inputs.docker-tag }}
+        tags: ghcr.io/anyone-protocol/onionperf:${{ inputs.docker-tag }}
         build-args: |
           ANON_ENV=${{ inputs.environment }}

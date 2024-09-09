@@ -55,8 +55,8 @@ job "onionperf-live" {
       }
 
       resources {
-        cpu    = 256
-        memory = 256
+        cpu    = 128
+        memory = 512
       }
       
     }

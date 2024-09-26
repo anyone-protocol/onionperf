@@ -46,7 +46,6 @@ job "onionperf-live" {
 
       config {
         image   = "ghcr.io/anyone-protocol/onionperf:9ceca6c968870b27fb27f6d68b0a8aea7b1e10ad"
-        force_pull = true
       }
 
       service {
@@ -55,8 +54,8 @@ job "onionperf-live" {
       }
 
       resources {
-        cpu    = 256
-        memory = 256
+        cpu    = 128
+        memory = 512
       }
       
     }

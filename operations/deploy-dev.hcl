@@ -46,7 +46,6 @@ job "onionperf-dev" {
 
       config {
         image   = "ghcr.io/anyone-protocol/onionperf:DEPLOY_TAG"
-        force_pull = true
       }
 
       service {
@@ -55,7 +54,7 @@ job "onionperf-dev" {
       }
 
       resources {
-        cpu    = 256
+        cpu    = 128
         memory = 256
       }
 

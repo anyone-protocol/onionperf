@@ -10,3 +10,5 @@ venv
 *.csv
 *.pyc
 .coverage
+
+.idea

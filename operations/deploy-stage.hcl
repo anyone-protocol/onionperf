@@ -31,7 +31,6 @@ job "onionperf-stage" {
 
       port "http-port" {
         static = 9221
-        to     = 80
       }
     }
 
@@ -114,7 +113,7 @@ server {
 
   index index.html;
 
-  listen 0.0.0.0:80;
+  listen 0.0.0.0:{{ env `NOMAD_PORT_http_port` }};
 
   location / {
     try_files $uri $uri/ =404;

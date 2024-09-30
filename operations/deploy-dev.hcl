@@ -31,7 +31,6 @@ job "onionperf-dev" {
 
       port "http-port" {
         static = 9220
-        to     = 80
       }
     }
 

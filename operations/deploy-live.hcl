@@ -44,7 +44,7 @@ job "onionperf-live" {
       }
 
       config {
-        image   = "ghcr.io/anyone-protocol/onionperf:9ceca6c968870b27fb27f6d68b0a8aea7b1e10ad"
+        image   = "ghcr.io/anyone-protocol/onionperf:DEPLOY_TAG"
       }
 
       service {

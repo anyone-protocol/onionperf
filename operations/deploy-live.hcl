@@ -3,6 +3,12 @@ job "onionperf-live" {
   type        = "service"
   namespace   = "ator-network"
 
+  update {
+    max_parallel      = 1
+    healthy_deadline  = "15m"
+    progress_deadline = "20m"
+  }
+
   group "onionperf-live-group" {
     count = 3
 
@@ -45,6 +51,7 @@ job "onionperf-live" {
 
       config {
         image   = "ghcr.io/anyone-protocol/onionperf:DEPLOY_TAG"
+        image_pull_timeout = "15m"
       }
 
       service {

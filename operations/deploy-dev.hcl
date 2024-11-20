@@ -61,7 +61,7 @@ job "onionperf-dev" {
 
       resources {
         cpu    = 128
-        memory = 256
+        memory = 1024
       }
 
     }

@@ -84,8 +84,8 @@ job "onionperf-live" {
       }
 
       resources {
-        cpu    = 64
-        memory = 64
+        cpu    = 256
+        memory = 256
       }
 
       service {

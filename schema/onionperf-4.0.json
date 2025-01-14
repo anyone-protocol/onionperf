@@ -517,7 +517,7 @@
                       "type": "string",
                       "title": "Stream target domain name and TCP port, obtained from STREAM events",
                       "examples": [
-                        "jzxfvaupigl7hkemf4jhfi2vrruvbb7ucyiwdolkkc2hf3xlm34f3qyd.onion:8080"
+                        "jzxfvaupigl7hkemf4jhfi2vrruvbb7ucyiwdolkkc2hf3xlm34f3qyd.anon:8080"
                       ]
                     },
                     "unix_ts_end": {

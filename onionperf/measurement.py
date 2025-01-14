@@ -275,7 +275,7 @@ class Measurement(object):
 
             server_urls = []
             if do_onion and self.hs_v3_service_id is not None:
-                server_urls.append("{0}.onion:{1}".format(self.hs_v3_service_id, tgen_client_conf.connect_port))
+                server_urls.append("{0}.anon:{1}".format(self.hs_v3_service_id, tgen_client_conf.connect_port))
             if do_inet:
                 connect_ip = tgen_client_conf.connect_ip if tgen_client_conf.connect_ip != '0.0.0.0' else util.get_ip_address()
                 server_urls.append("{0}:{1}".format(connect_ip, tgen_client_conf.connect_port))
@@ -445,7 +445,7 @@ WarnUnsafeSocks 0\nSafeLogging 0\nMaxCircuitDirtiness 60 seconds\nDataDirectory 
             self.hs_v3_service_id = response.service_id
             self.hs_v3_control_port = control_port
     
-            logging.info("Ephemeral hidden service is available at {0}.onion".format(response.service_id))
+            logging.info("Ephemeral hidden service is available at {0}.anon".format(response.service_id))
         return response.service_id
 
     def __start_tor_client(self, control_port, socks_port):

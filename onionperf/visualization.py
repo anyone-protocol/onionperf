@@ -105,7 +105,7 @@ class TGenVisualization(Visualization):
                             stream["id"] = stream_id
                             stream["label"] = label
                             stream["filesize_bytes"] = int(stream_data["stream_info"]["recvsize"])
-                            stream["server"] = "onion" if ".onion:" in stream_data["transport_info"]["remote"] else "public"
+                            stream["server"] = "onion" if ".anon:" in stream_data["transport_info"]["remote"] else "public"
                             if "time_info" in stream_data:
                                 s = stream_data["time_info"]
                                 if "usecs-to-first-byte-recv" in s and float(s["usecs-to-first-byte-recv"]) >= 0:
@@ -129,7 +129,7 @@ class TGenVisualization(Visualization):
                             stream["id"] = transfer_id
                             stream["label"] = label
                             stream["filesize_bytes"] = transfer_data["filesize_bytes"]
-                            stream["server"] = "onion" if ".onion:" in transfer_data["endpoint_remote"] else "public"
+                            stream["server"] = "onion" if ".anon:" in transfer_data["endpoint_remote"] else "public"
                             if "elapsed_seconds" in transfer_data:
                                s = transfer_data["elapsed_seconds"]
                                if "payload_progress" in s:

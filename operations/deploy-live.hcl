@@ -21,13 +21,13 @@ job "onionperf-live" {
     spread {
       attribute = "${node.unique.id}"
       weight    = 100
-      target "c8e55509-a756-0aa7-563b-9665aa4915ab" {
+      target "ca1a49f2-ffdf-9c13-edca-6939f775e848" {
         percent = 34
       }
-      target "c2adc610-6316-cd9d-c678-cda4b0080b52" {
+      target "63fdf9a5-4ea8-4c12-5f6b-b59479d95d12" {
         percent = 33
       }
-      target "4aa61f61-893a-baf4-541b-870e99ac4839" {
+      target "ababa2ce-7129-d4b9-f9c4-b0e6f9d80f7f" {
         percent = 33
       }
     }

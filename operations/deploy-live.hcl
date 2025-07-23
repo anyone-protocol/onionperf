@@ -40,6 +40,23 @@ job "onionperf-live" {
       }
     }
 
+    service {
+      name     = "onionperf-live"
+      tags     = ["onionperf", "logging"]
+      port     = "http-port"
+      check {
+        name     = "onionperf nginx http server alive"
+        type     = "tcp"
+        interval = "10s"
+        timeout  = "10s"
+        address_mode = "alloc"
+        check_restart {
+          limit = 10
+          grace = "30s"
+        }
+      }
+    }
+
     task "onionperf-measure-live-task" {
       driver = "docker"
 
@@ -87,22 +104,6 @@ job "onionperf-live" {
       resources {
         cpu    = 256
         memory = 256
-      }
-
-      service {
-        name     = "onionperf-live"
-        tags     = ["onionperf", "logging"]
-        port     = "http-port"
-        check {
-          name     = "onionperf nginx http server alive"
-          type     = "tcp"
-          interval = "10s"
-          timeout  = "10s"
-          check_restart {
-            limit = 10
-            grace = "30s"
-          }
-        }
       }
 
       template {
